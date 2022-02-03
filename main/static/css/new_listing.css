@@ -1,0 +1,54 @@
+#new-listing input,
+select {
+  padding: 8px 12px 8px 12px;
+  display: inline-block;
+}
+
+#new-listing h3 {
+  margin-bottom: 10px;
+}
+
+#new-listing-offer,
+#new-listing-lf {
+  width: 45%;
+  display: inline-block;
+  padding-right: 20px;
+}
+
+#new-listing-offer-title,
+#new-listing-lf-title {
+  width: 60%;
+}
+
+#new-listing-offer-type,
+#new-listing-lf-type {
+  width: 30%;
+}
+
+#new-listing-offer-description,
+#new-listing-lf-description {
+  margin: 14px 0px 14px 0px;
+  width: 92%;
+  min-height: 100px;
+  text-align: top;
+}
+
+#new-listing-submit {
+    margin-top: 30px;
+    font-size: 1.4rem;
+    padding: 8px 12px 8px 12px;
+    border-radius: 3px;
+    border: none;
+    background-color: #f1f1f1;
+}
+
+#new-listing-submit:hover {
+    cursor: pointer;
+}
+
+@media (max-width: 800px) {
+  #new-listing-offer,
+  #new-listing-lf {
+    width: 100%;
+  }
+}

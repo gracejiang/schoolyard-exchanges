@@ -1,50 +1,54 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from main.models import Tweet
+from main.models import Exchange
 from datetime import datetime
 
 '''TEMPLATE RENDERING'''
 def main_view(request):
     if not request.user.is_authenticated:
-         return redirect('/splash/')
+        return redirect('/splash/')
 
-    if request.method == 'POST' and request.POST['body'] != "":
-        tweet = Tweet.objects.create(
-            body = request.POST['body'],
-            author = request.user,
-            created_at = datetime.now()
-        )
-        tweet.save()
-
-    tweets = Tweet.objects.all().order_by('-created_at')
-    return render(request, 'main.html', {'tweets': tweets})
+    exchanges = Exchange.objects.all().order_by('-created_at')
+    return render(request, 'main.html', {'tweets': exchanges})
 
 def splash_view(request):
     return render(request, 'splash.html' )
 
+def new_listing_view(request):
+    if not request.user.is_authenticated:
+        return redirect('/splash/')
+
+    if request.method == 'POST':
+        print("HELLOOOO")
+        if request.POST['offer_title'] != "" and request.POST['offer_type'] != "" and request.POST['offer_description'] != "" and request.POST['lf_title'] != "" and request.POST['lf_type'] != "" and request.POST['lf_description'] != "":
+            print("sup")
+            print(request.POST['offer_title'])
+            exchange = Exchange.objects.create(
+                offer_title = request.POST['title'],
+                offer_description = request.POST['offer_description'],
+                offer_type = request.POST['offer_type'],
+                lf_description = request.POST['lf_description'],
+                lf_type = request.POST['lf_type'],
+                seller = request.user,
+                buyer = None,
+                created_at = datetime.now()
+            )
+            exchange.save()
+
+            exchanges = Exchange.objects.all().order_by('-created_at')
+            return render(request, 'main.html', {'exchanges': exchanges})
+        else:
+            return redirect('/new_listing?error=EmptyInputFields')
+            
+    return render(request, 'new_listing.html' )
 
 '''ACTIONS'''
-# delete a tweet routing
-def delete_view(request):
-    tweet = Tweet.objects.get(id=request.GET['id'])
-    if tweet.author == request.user:
-        tweet.delete()
-    return redirect('/')
-
-# like a tweet
-def like_tweet(request):
-    tweet = Tweet.objects.get(id=request.GET['id'])
-
-    # not yet liked
-    if len(tweet.likes.filter(username=request.user.username)) == 0:
-        tweet.likes.add(request.user)
-    
-    # liked
-    else:
-        tweet.likes.remove(request.user)
-
-    tweet.save()
+# delete an exchange routing
+def delete_exchange_view(request):
+    exchange = Exchange.objects.get(id=request.GET['id'])
+    if exchange.seller == request.user:
+        exchange.delete()
     return redirect('/')
 
 

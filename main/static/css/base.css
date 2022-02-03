@@ -1,3 +1,33 @@
 * {
     font-family: 'Avenir', 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.center-container {
+    margin: auto;
+    max-width: 800px;
+    padding: 20px;
+}
+
+#navbar {
+    border-bottom: 1px solid #ccc;
+    padding: 20px 0px 20px 0px;
+    margin-bottom: 40px;
+}
+
+.navbar-item {
+    display: inline-block;
+}
+
+.navbar-item a {
+    text-decoration: none;
+    color: inherit;
+    padding: 8px 12px 8px 12px;
+    border-radius: 5px;
+}
+
+.navbar-item a:hover {
+    background-color: #f7f7f7;
+    color: #3c96ba;
 }

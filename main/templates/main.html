@@ -4,18 +4,12 @@
 
 {% block body %}
 <h1>hello, {{ user.username }}!</h1>
-<a href="/logout"><button>Logout</button></a>
 
 <div>
-  <form method="POST" action="/">
-    {% csrf_token %}
-    <h2>tweet something!</h2>
-    <input name="body" placeholder="what's on your mind :)" />
-    <input type="submit" value="post tweet" />
-  </form>
+  <a href="/new_listing"><button>New Listing</button></a>
 </div>
 
-<div>
+<!-- <div>
   {% for tweet in tweets %}
   <div class="tweet-card">
     <p>
@@ -37,5 +31,5 @@
     {% endif %}
   </div>
   {% endfor %}
-</div>
+</div> -->
 {% endblock %}

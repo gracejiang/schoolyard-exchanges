@@ -2,12 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
-class Tweet(models.Model):
-    body = models.TextField(max_length=300)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+class Exchange(models.Model):
+    title = models.TextField(max_length=100, default="")
+    offer_description = models.TextField(max_length=1000, default="")
+    offer_type = models.TextField(default="")
+    lf_description = models.TextField(max_length=1000, default="")
+    lf_type = models.TextField(default="")
+    seller = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="buyer", null=True)
     created_at = models.DateTimeField()
-
-    likes = models.ManyToManyField(User, related_name='likes', blank=True)
 
     def __str__(self):
         return self.body

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}{% load static %} 
+{% block title %}New Listing{% endblock %} 
+{% block styles %}{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/new_listing.css' %}" />{% endblock %} 
+{% block body %}
+
+<h1 style="margin-bottom: 20px;">New Listing</h1>
+
+<div id="new-listing">
+  <form method="POST" action="/new_listing/">
+    {% csrf_token %}
+
+    <div id="new-listing-offer">
+      <h3>What are you offering?</h3>
+      <input id="new-listing-offer-title" name="offer_title" placeholder="What are you offering?" />
+      <select id="new-listing-offer-type" name="offer_type">
+        <option value="object">Object</option>
+        <option value="favor">Favor</option>
+        <option value="money">Money</option>
+      </select>
+      <input
+        id="new-listing-offer-description"
+        name="offer_description"
+        placeholder="Describe what you are offering in more detail."
+      />
+    </div>
+
+    <div id="new-listing-lf">
+      <h3>What are you looking for?</h3>
+      <input id="new-listing-lf-title" name="lf_title" placeholder="What are you looking for?" />
+      <select id="new-listing-offer-type" name="lf_type">
+        <option value="object">Object</option>
+        <option value="favor">Favor</option>
+        <option value="money">Money</option>
+      </select>
+      <input
+        id="new-listing-offer-description"
+        name="lf_description"
+        placeholder="Describe what you are looking for in more detail."
+      />
+    </div>
+
+    <button id="new-listing-submit" type="submit">Post Listing</button>
+  </form>
+</div>
+
+{% endblock %}
