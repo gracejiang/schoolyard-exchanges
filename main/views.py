@@ -10,7 +10,21 @@ def main_view(request):
         return redirect('/splash/')
 
     exchanges = Exchange.objects.all().order_by('-created_at')
-    return render(request, 'main.html', {'tweets': exchanges})
+    return render(request, 'main.html', {'exchanges': exchanges})
+
+def your_listings_view(request):
+    if not request.user.is_authenticated:
+        return redirect('/splash/')
+
+    exchanges = Exchange.objects.all().order_by('-created_at').filter(seller=request.user)
+    return render(request, 'your_listings.html', {'exchanges': exchanges})
+
+def your_biddings_view(request):
+    if not request.user.is_authenticated:
+        return redirect('/splash/')
+
+    exchanges = Exchange.objects.all().order_by('-created_at').filter(buyer=request.user)
+    return render(request, 'your_listings.html', {'exchanges': exchanges})
 
 def splash_view(request):
     return render(request, 'splash.html' )
@@ -22,12 +36,12 @@ def new_listing_view(request):
     if request.method == 'POST':
         print("HELLOOOO")
         if request.POST['offer_title'] != "" and request.POST['offer_type'] != "" and request.POST['offer_description'] != "" and request.POST['lf_title'] != "" and request.POST['lf_type'] != "" and request.POST['lf_description'] != "":
-            print("sup")
             print(request.POST['offer_title'])
             exchange = Exchange.objects.create(
-                offer_title = request.POST['title'],
+                offer_title = request.POST['offer_title'],
                 offer_description = request.POST['offer_description'],
                 offer_type = request.POST['offer_type'],
+                lf_title = request.POST['lf_title'],
                 lf_description = request.POST['lf_description'],
                 lf_type = request.POST['lf_type'],
                 seller = request.user,
@@ -40,7 +54,7 @@ def new_listing_view(request):
             return render(request, 'main.html', {'exchanges': exchanges})
         else:
             return redirect('/new_listing?error=EmptyInputFields')
-            
+
     return render(request, 'new_listing.html' )
 
 '''ACTIONS'''
@@ -49,7 +63,7 @@ def delete_exchange_view(request):
     exchange = Exchange.objects.get(id=request.GET['id'])
     if exchange.seller == request.user:
         exchange.delete()
-    return redirect('/')
+    return redirect('/your_listings')
 
 
 '''USER LOGIN/REGISTRATION/LOGOUT'''

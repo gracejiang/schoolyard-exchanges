@@ -1,17 +1,12 @@
 {% extends 'base.html' %} {% load static %} 
-{% block title %}Discover{% endblock %} 
+{% block title %}Your Listings{% endblock %} 
 {% block styles %}{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/listings.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'css/discover.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/your_bids.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/your_listings.css' %}" />
 {% endblock %} 
 {% block body %}
-
-<div id="discover-page">
-  <h1>Discover Listings</h1>
-  <div>
-    <a href="/new_listing"><button>New Listing</button></a>
-  </div>
-  
+<div id="your-listings-page">
+  <h1>Your Listings</h1>
   <div>
     {% for exchange in exchanges %}
     <div class="exchange-card">
@@ -21,7 +16,7 @@
       </p>
   
       <div class="exchange-offer-container">
-        <p><strong>I am offering...</strong></p>
+        <p><strong>They are offering...</strong></p>
         <h3>{{ exchange.offer_title }}</h3>
 
         {% if exchange.offer_type == "object" %}
@@ -36,7 +31,7 @@
       </div>
   
       <div class="exchange-lf-container">
-        <p><strong>I am looking for...</strong></p>
+        <p><strong>I have bid...</strong></p>
         <h3>{{ exchange.lf_title }}</h3>
         
         {% if exchange.lf_type == "object" %}

@@ -1,0 +1,9 @@
+#discover-page button {
+    padding: 8px 12px 8px 12px;
+    font-size: 1rem;
+    margin: 12px 0px 24px 0px;
+}
+
+#discover-page button:hover {
+    cursor: pointer;
+}
