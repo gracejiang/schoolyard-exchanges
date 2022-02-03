@@ -1,0 +1,41 @@
+{% extends 'base.html' %} {% load static %} 
+{% block title %} home :) {% endblock %} 
+{% block styles %} {% endblock %} 
+
+{% block body %}
+<h1>hello, {{ user.username }}!</h1>
+<a href="/logout"><button>Logout</button></a>
+
+<div>
+  <form method="POST" action="/">
+    {% csrf_token %}
+    <h2>tweet something!</h2>
+    <input name="body" placeholder="what's on your mind :)" />
+    <input type="submit" value="post tweet" />
+  </form>
+</div>
+
+<div>
+  {% for tweet in tweets %}
+  <div class="tweet-card">
+    <p>
+      <strong>{{ tweet.author.username }}</strong> |
+      <i>{{ tweet.created_at }}</i>
+    </p>
+    <p>{{ tweet.body }}</p>
+    <p><a href="/like?id={{tweet.id}}">
+      {% if request.user in tweet.likes.all %}
+        unlike
+      {% else %}
+        like
+      {% endif %}
+    </a> ({{ tweet.likes.count }} &hearts;)</p>
+    <p>      
+    </p>
+    {% if tweet.author == user %}
+      <p><a href="delete?id={{tweet.id}}">delete tweet</a></p>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
