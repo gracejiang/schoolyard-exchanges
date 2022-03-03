@@ -5,25 +5,41 @@ from main.models import Exchange
 from datetime import datetime
 
 '''TEMPLATE RENDERING'''
+def get_exchanges_filter(request):
+    searchText = (".filter(name__contains=\"" + request.POST['searchText'] + "\")") if ('searchText' in request.POST and request.POST['searchText'] != "") else ""
+    filterOffering = (".filter(offer_type=\"" + request.POST['filterOffering'] + "\")") if (('filterOffering' in request.POST) and request.POST['filterOffering'] != "any") else ""
+    filterLf = (".filter(lf_type=\"" + request.POST['filterLf'] + "\")") if (('filterLf' in request.POST) and request.POST['filterLf'] != "any") else ""
+    filters_str = "Exchange.objects.all()" + searchText + filterOffering + filterLf + ".order_by('-created_on')" 
+
+    print("filsters_str")
+    print(filters_str)
+    exchanges = eval(filters_str)
+    
+    return exchanges
+
 def main_view(request):
     if not request.user.is_authenticated:
         return redirect('/splash/')
+    
+    if request.method == 'POST':
+        exchanges = get_exchanges_filter(request)
+    else:
+        exchanges = Exchange.objects.all().order_by('-created_on')
 
-    exchanges = Exchange.objects.all().order_by('-created_at')
     return render(request, 'main.html', {'exchanges': exchanges})
 
 def your_listings_view(request):
     if not request.user.is_authenticated:
         return redirect('/splash/')
 
-    exchanges = Exchange.objects.all().order_by('-created_at').filter(seller=request.user)
+    exchanges = Exchange.objects.all().order_by('-created_on').filter(seller=request.user)
     return render(request, 'your_listings.html', {'exchanges': exchanges})
 
 def your_biddings_view(request):
     if not request.user.is_authenticated:
         return redirect('/splash/')
 
-    exchanges = Exchange.objects.all().order_by('-created_at').filter(buyer=request.user)
+    exchanges = Exchange.objects.all().order_by('-created_on').filter(buyer=request.user)
     return render(request, 'your_listings.html', {'exchanges': exchanges})
 
 def splash_view(request):
@@ -34,8 +50,8 @@ def new_listing_view(request):
         return redirect('/splash/')
 
     if request.method == 'POST':
-        print("HELLOOOO")
-        if request.POST['offer_title'] != "" and request.POST['offer_type'] != "" and request.POST['offer_description'] != "" and request.POST['lf_title'] != "" and request.POST['lf_type'] != "" and request.POST['lf_description'] != "":
+        valid_request = 'offer_title' in request.POST and 'offer_type' in request.POST and 'offer_description' in request.POST and 'lf_title' in request.POST and 'lf_type' in request.POST and 'lf_description' in request.POST 
+        if valid_request and request.POST['offer_title'] != "" and request.POST['offer_type'] != "" and request.POST['offer_description'] != "" and request.POST['lf_title'] != "" and request.POST['lf_type'] != "" and request.POST['lf_description'] != "":
             print(request.POST['offer_title'])
             exchange = Exchange.objects.create(
                 offer_title = request.POST['offer_title'],
@@ -46,11 +62,12 @@ def new_listing_view(request):
                 lf_type = request.POST['lf_type'],
                 seller = request.user,
                 buyer = None,
-                created_at = datetime.now()
+                name = request.POST['offer_title'] + " " + request.POST['lf_title'],
+                created_on = datetime.now()
             )
             exchange.save()
 
-            exchanges = Exchange.objects.all().order_by('-created_at')
+            exchanges = Exchange.objects.all().order_by('-created_on')
             return render(request, 'main.html', {'exchanges': exchanges})
         else:
             return redirect('/new_listing?error=EmptyInputFields')
@@ -64,7 +81,6 @@ def delete_exchange_view(request):
     if exchange.seller == request.user:
         exchange.delete()
     return redirect('/your_listings')
-
 
 '''USER LOGIN/REGISTRATION/LOGOUT'''
 

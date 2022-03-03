@@ -11,13 +11,35 @@
   <div>
     <a href="/new_listing"><button>New Listing</button></a>
   </div>
+
+  <div>
+    <form method="POST" >
+      {% csrf_token %}
+      <input class="explore-search-bar" type="text" name="searchText" placeholder="What are you looking for or offering?"></input>
+      <h3>Looking For</h3>
+      <select class="explore-select" name="filterLf" size="1">
+          <option value="any">any</option>
+          <option value="money">money</option>
+          <option value="favor">favor</option>
+          <option value="object">object</option>
+      </select>
+      <h3>Offering</h3>
+      <select class="explore-select" name="filterOffering" size="1">
+          <option value="any">any</option>
+          <option value="money">money</option>
+          <option value="favor">favor</option>
+          <option value="object">object</option>
+      </select>
+      <button id="go-button" type="submit"><strong>Search</strong></button>
+  </form>
+  </div>
   
   <div>
     {% for exchange in exchanges %}
     <div class="exchange-card">
       <p class="exchange-meta-data">
         @<strong>{{ exchange.seller.username }}</strong> |
-        <em>{{ exchange.created_at }}</em>
+        <em>{{ exchange.created_on }}</em>
       </p>
   
       <div class="exchange-offer-container">
