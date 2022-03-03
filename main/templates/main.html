@@ -12,25 +12,36 @@
     <a href="/new_listing"><button>New Listing</button></a>
   </div>
 
-  <div>
+  <div style="margin-bottom: 40px; background-color: #f4f4f4; border-radius: 5px; padding: 6px 16px 16px 16px;">
     <form method="POST" >
       {% csrf_token %}
-      <input class="explore-search-bar" type="text" name="searchText" placeholder="What are you looking for or offering?"></input>
-      <h3>Looking For</h3>
-      <select class="explore-select" name="filterLf" size="1">
-          <option value="any">any</option>
-          <option value="money">money</option>
-          <option value="favor">favor</option>
-          <option value="object">object</option>
-      </select>
-      <h3>Offering</h3>
-      <select class="explore-select" name="filterOffering" size="1">
-          <option value="any">any</option>
-          <option value="money">money</option>
-          <option value="favor">favor</option>
-          <option value="object">object</option>
-      </select>
-      <button id="go-button" type="submit"><strong>Search</strong></button>
+        <div style="width: 75%; padding-top: 14px; display: inline-block">
+          <input style="width: 80%; padding: 6px; font-size: 1.1rem;" id="discover-search-bar" class="explore-search-bar" type="text" name="searchText" placeholder="What are you looking for or offering?"></input>
+          <div style="height: 20px"></div>
+          <div style="width: 40%; display: inline-block">
+            <p>You Are Looking For</p>
+            <select class="explore-select" name="filterLf" size="1" style="width: 80%; padding: 6px; margin-top: 8px; font-size: 1.1rem;">
+                <option value="any">any</option>
+                <option value="money">money</option>
+                <option value="favor">favor</option>
+                <option value="object">object</option>
+            </select>
+          </div>
+
+          <div style="width: 40%; display: inline-block">
+            <p>You Are Offering</p>
+            <select class="explore-select" name="filterOffering" size="1" style="width: 80%; padding: 6px; margin-top: 8px; font-size: 1.1rem;">
+                <option value="any">any</option>
+                <option value="money">money</option>
+                <option value="favor">favor</option>
+                <option value="object">object</option>
+              </select>
+          </div>
+          
+      </div>
+      <div style="width: 15%; display: inline-block; vertical-align: top; text-align: right;">
+        <button id="go-button" type="submit"><strong>Search</strong></button>
+      </div>
   </form>
   </div>
   

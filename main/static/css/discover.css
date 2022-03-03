@@ -7,3 +7,7 @@
 #discover-page button:hover {
     cursor: pointer;
 }
+
+#discover-search-bar {
+    width: 400px;
+}
