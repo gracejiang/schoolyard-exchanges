@@ -7,8 +7,8 @@ from datetime import datetime
 '''TEMPLATE RENDERING'''
 def get_exchanges_filter(request):
     searchText = (".filter(name__contains=\"" + request.POST['searchText'] + "\")") if ('searchText' in request.POST and request.POST['searchText'] != "") else ""
-    filterOffering = (".filter(offer_type=\"" + request.POST['filterOffering'] + "\")") if (('filterOffering' in request.POST) and request.POST['filterOffering'] != "any") else ""
-    filterLf = (".filter(lf_type=\"" + request.POST['filterLf'] + "\")") if (('filterLf' in request.POST) and request.POST['filterLf'] != "any") else ""
+    filterOffering = (".filter(lf_type=\"" + request.POST['filterOffering'] + "\")") if (('filterOffering' in request.POST) and request.POST['filterOffering'] != "any") else ""
+    filterLf = (".filter(offer_type=\"" + request.POST['filterLf'] + "\")") if (('filterLf' in request.POST) and request.POST['filterLf'] != "any") else ""
     filters_str = "Exchange.objects.all()" + searchText + filterOffering + filterLf + ".order_by('-created_on')" 
 
     print("filsters_str")
