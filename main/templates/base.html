@@ -16,12 +16,17 @@
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
+   <div id="navbar-main">
+     <a href="http://localhost:3000/"><img src="../static/img/logo.png"/>
+      <!-- <span>schoolyard</span> -->
+    </a>
+   </div>
     <div class="center-container">
       <div id="navbar">
-        <div class="navbar-item"><a href="http://localhost:3000/"><strong>&larr; Home</strong></a></div>
+        <!-- <div class="navbar-item"><a href="http://localhost:3000/"><strong>&larr; Home</strong></a></div> -->
         <div class="navbar-item"><a href="/">Discover</a></div>
         <div class="navbar-item"><a href="/your_listings">Your Listings</a></div>
-        <div class="navbar-item"><a href="/logout">Logout</a></div>
+        <!-- <div class="navbar-item"><a href="/logout">Logout</a></div> -->
       </div>
       {% block body %}{% endblock %}
     </div>
