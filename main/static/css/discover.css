@@ -1,11 +1,26 @@
 #discover-page button {
-    padding: 8px 12px 8px 12px;
+    padding: 12px;
     font-size: 1rem;
     margin: 12px 0px 24px 0px;
+    border: none;
+    border-radius: 5px;
 }
 
 #discover-page button:hover {
     cursor: pointer;
+}
+
+
+#new-listing-button {
+    background-color: #64CB85;
+    color: white;
+    font-weight: 400;
+}
+
+#search-button {
+    background-color: #66C7F4;
+    color: white;
+    font-weight: 400;
 }
 
 #discover-search-bar {

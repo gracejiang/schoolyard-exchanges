@@ -20,11 +20,11 @@
         <h3>{{ exchange.offer_title }}</h3>
 
         {% if exchange.offer_type == "object" %}
-          <p class="exchange-type" style="background-color: #cee1eb;">{{ exchange.offer_type }}</p>
+          <p class="exchange-type object-type">{{ exchange.offer_type }}</p>
         {% elif exchange.offer_type == "money" %}
-          <p class="exchange-type" style="background-color: #cddbc3;">{{ exchange.offer_type }}</p>
+          <p class="exchange-type money-type">{{ exchange.offer_type }}</p>
         {% elif exchange.offer_type == "favor" %}
-          <p class="exchange-type" style="background-color: #f0daeb;">{{ exchange.offer_type }}</p>
+          <p class="exchange-type favor-type">{{ exchange.offer_type }}</p>
         {% endif %}
 
         <p>{{ exchange.offer_description }}</p>
@@ -35,18 +35,21 @@
         <h3>{{ exchange.lf_title }}</h3>
         
         {% if exchange.lf_type == "object" %}
-          <p class="exchange-type" style="background-color: #cee1eb;">{{ exchange.lf_type }}</p>
+          <p class="exchange-type object-type">{{ exchange.lf_type }}</p>
         {% elif exchange.lf_type == "money" %}
-          <p class="exchange-type" style="background-color: #cddbc3;">{{ exchange.lf_type }}</p>
+          <p class="exchange-type money-type">{{ exchange.lf_type }}</p>
         {% elif exchange.lf_type == "favor" %}
-          <p class="exchange-type" style="background-color: #f0daeb;">{{ exchange.lf_type }}</p>
+          <p class="exchange-type favor-type">{{ exchange.lf_type }}</p>
         {% endif %}
 
 
         <p>{{ exchange.lf_description }}</p>
       </div>
-      <div class="exchange-delete-btn">
-        <a href="/delete?id={{exchange.id}}">delete</a>
+
+      <div style="text-align: right;">
+        <button id="exchange-delete-btn">
+          <a href="/delete?id={{exchange.id}}">delete</a>
+        </button>
       </div>
       
     </div>

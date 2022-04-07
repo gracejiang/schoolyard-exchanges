@@ -9,10 +9,10 @@
 <div id="discover-page">
   <h1>Discover Listings</h1>
   <div>
-    <a href="/new_listing"><button>New Listing</button></a>
+    <a href="/new_listing"><button id="new-listing-button">New Listing</button></a>
   </div>
 
-  <div style="margin-bottom: 40px; background-color: #f4f4f4; border-radius: 5px; padding: 6px 16px 16px 16px;">
+  <div style="margin-bottom: 40px; background-color: #fff; box-shadow: 0px 2px 5px #C1CAD6; border-radius: 5px; padding: 6px 16px 16px 16px;">
     <form method="POST" >
       {% csrf_token %}
         <div style="width: 75%; padding-top: 14px; display: inline-block">
@@ -40,7 +40,7 @@
           
       </div>
       <div style="width: 15%; display: inline-block; vertical-align: top; text-align: right;">
-        <button id="go-button" type="submit"><strong>Search</strong></button>
+        <button id="search-button" type="submit">Search</button>
       </div>
   </form>
   </div>
@@ -58,11 +58,11 @@
         <h3>{{ exchange.offer_title }}</h3>
 
         {% if exchange.offer_type == "object" %}
-          <p class="exchange-type" style="background-color: #cee1eb;">{{ exchange.offer_type }}</p>
+          <p class="exchange-type object-type">{{ exchange.offer_type }}</p>
         {% elif exchange.offer_type == "money" %}
-          <p class="exchange-type" style="background-color: #cddbc3;">{{ exchange.offer_type }}</p>
+          <p class="exchange-type money-type">{{ exchange.offer_type }}</p>
         {% elif exchange.offer_type == "favor" %}
-          <p class="exchange-type" style="background-color: #f0daeb;">{{ exchange.offer_type }}</p>
+          <p class="exchange-type favor-type">{{ exchange.offer_type }}</p>
         {% endif %}
 
         <p>{{ exchange.offer_description }}</p>
@@ -73,11 +73,11 @@
         <h3>{{ exchange.lf_title }}</h3>
         
         {% if exchange.lf_type == "object" %}
-          <p class="exchange-type" style="background-color: #cee1eb;">{{ exchange.lf_type }}</p>
+          <p class="exchange-type object-type">{{ exchange.lf_type }}</p>
         {% elif exchange.lf_type == "money" %}
-          <p class="exchange-type" style="background-color: #cddbc3;">{{ exchange.lf_type }}</p>
+          <p class="exchange-type money-type">{{ exchange.lf_type }}</p>
         {% elif exchange.lf_type == "favor" %}
-          <p class="exchange-type" style="background-color: #f0daeb;">{{ exchange.lf_type }}</p>
+          <p class="exchange-type favor-type">{{ exchange.lf_type }}</p>
         {% endif %}
 
 
