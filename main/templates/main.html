@@ -52,10 +52,11 @@
   <div>
     {% for exchange in exchanges %}
     <div class="exchange-card">
-      <p class="exchange-meta-data">
-        @<strong>{{ exchange.seller.username }}</strong> |
-        <em>{{ exchange.created_on }}</em>
+      <p class="exchange-meta-data" style="font-size: 1.15rem">
+        @<strong>{{ exchange.seller.username }}</strong>: {{ exchange.seller.email }}<br/>
+        <small style="font-size: 0.9rem;"><em>{{ exchange.created_on }}</em></small>
       </p>
+      <div style="height: 10px"></div>
   
       <div class="exchange-offer-container">
         <p><strong>I am offering...</strong></p>
@@ -87,6 +88,7 @@
 
         <p>{{ exchange.lf_description }}</p>
       </div>
+      <div style="height: 10px"></div>
       
     </div>
     {% endfor %}
