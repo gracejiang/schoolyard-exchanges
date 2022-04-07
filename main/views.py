@@ -82,6 +82,7 @@ def delete_exchange_view(request):
         exchange.delete()
     return redirect('/your_listings')
 
+
 '''USER LOGIN/REGISTRATION/LOGOUT'''
 
 # login
